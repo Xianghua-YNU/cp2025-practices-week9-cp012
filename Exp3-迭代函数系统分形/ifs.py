@@ -55,15 +55,13 @@ def run_ifs(ifs_params, num_points=100000, num_skip=100):
 
     # 提取概率用于选择变换
     probs = [param[6] for param in ifs_params]
-    cum_probs = np.cumsum(probs)
+    indices = np.arange(len(ifs_params))
 
     for i in range(num_points + num_skip):
         # 随机选择变换
         r = np.random.random()
-        for j, cp in enumerate(cum_probs):
-            if r < cp:
-                point = apply_transform(point, ifs_params[j])
-                break
+        idx = np.random.choice(indices, p=probs)
+        point = apply_transform(point, ifs_params[idx])
 
         # 跳过前num_skip个点
         if i >= num_skip:
