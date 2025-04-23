@@ -35,7 +35,7 @@ def apply_transform(point, params):
     :return: 变换后的新坐标(x',y')
     """
     x, y = point
-    a, b, c, d, e, f, p= params
+    a, b, c, d, e, f, _= params
     x_new = a * x + b * y + e
     y_new = c * x + d * y + f
     return (x_new, y_new)
@@ -50,7 +50,7 @@ def run_ifs(ifs_params, num_points=100000, num_skip=100):
     :return: 生成的点坐标数组
     """
     # 初始化点
-    point = (0, 0)
+    point = (0.5, 0)
     points = np.zeros((num_points, 2))
 
     # 提取概率用于选择变换
